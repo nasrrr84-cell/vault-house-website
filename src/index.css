@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 36 42% 91%;        /* #f4ebdd طين فاتح */
+    --foreground: 30 6% 21%;         /* #3c3835 */
+    --card: 25 40% 96%;              /* #f8f1ec */
+    --card-foreground: 30 6% 21%;
+    --popover: 26 33% 97%;
+    --popover-foreground: 30 6% 21%;
+    --primary: 27 49% 49%;           /* #bc773f terracotta */
+    --primary-foreground: 26 33% 97%;
+    --secondary: 25 44% 93%;         /* #f5ece5 cream */
+    --secondary-foreground: 30 6% 21%;
+    --muted: 25 44% 93%;
+    --muted-foreground: 28 8% 44%;
+    --accent: 25 44% 93%;
+    --accent-foreground: 30 6% 21%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 28 22% 86%;
+    --input: 28 22% 80%;
+    --ring: 27 49% 49%;
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Noto Kufi Arabic", "Amiri", -apple-system, "Segoe UI", sans-serif;
+    font-weight: 400;
+    line-height: 1.9;
+    -webkit-font-smoothing: antialiased;
+  }
+
+}
+
+@layer components {
+  .font-display {
+    font-family: "Amiri", "Noto Kufi Arabic", serif;
+    line-height: 1.45;
+  }
+  .font-latin {
+    font-family: "Marcellus", serif;
+    letter-spacing: 0.08em;
+  }
+  .eyebrow {
+    @apply font-latin text-xs uppercase text-primary;
+    letter-spacing: 0.28em;
+  }
+  .pill-btn {
+    @apply inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#a5652f];
+  }
+  .pill-btn-ghost {
+    @apply inline-flex items-center gap-2 rounded-full border border-foreground/25 px-7 py-3 text-sm font-semibold text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-primary hover:text-primary;
+  }
+  .deco-arch {
+    position: relative;
+  }
+  .deco-arch::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: -3rem;
+    top: 50%;
+    width: 8rem;
+    height: 16rem;
+    transform: translateY(-50%);
+    border: 1px solid #dec9b8;
+    border-radius: 8rem 8rem 0 0;
+    pointer-events: none;
+  }
+  .card-lift {
+    @apply transition-all duration-500;
+  }
+  .card-lift:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 48px -24px rgba(60, 56, 53, 0.35);
+  }
+}
+
+/* scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* image mask reveal */
+.mask-reveal {
+  clip-path: inset(12% 8% 12% 8% round 12px);
+  transition: clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.mask-reveal.is-visible {
+  clip-path: inset(0 0 0 0 round 12px);
+}
+
+/* hero letter stagger */
+.hero-line span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.6em);
+  animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes rise {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* subtle marquee for proof strip */
+@keyframes marquee-rtl {
+  from { transform: translateX(0); }
+  to { transform: translateX(50%); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-rtl 36s linear infinite;
+}
+
+/* dialog polish */
+[data-radix-dialog-content] {
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+/* number tabular */
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* table */
+.prose-table table { @apply w-full text-sm; }
+.prose-table th { @apply bg-secondary px-4 py-3 text-start font-semibold; }
+.prose-table td { @apply border-t border-border px-4 py-3 align-top; }
+
+::selection { background: #bc773f; color: #faf6f3; }
