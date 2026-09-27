@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import Reveal from "@/components/Reveal";
 import Seo from "@/components/Seo";
 import { BookletDialog } from "@/components/LeadForm";
+import ProcessSection from "@/components/ProcessSection";
 import { useT } from "@/providers/lang";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
